@@ -1,0 +1,37 @@
+name: Build Binaries
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    env:
+      GO_VERSION: "1.22"
+      CHOCOLATEY_VERSION: 2.2.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+
+      - name: Install chocolatey
+        run: |
+          mkdir -p /opt/chocolatey
+          wget -q -O - "https://github.com/chocolatey/choco/releases/download/${CHOCOLATEY_VERSION}/chocolatey.v${CHOCOLATEY_VERSION}.tar.gz" | tar -xz -C "/opt/chocolatey"
+          echo '#!/bin/bash' >> /usr/local/bin/choco
+          echo 'mono /opt/chocolatey/choco.exe $@' >> /usr/local/bin/choco
+          chmod +x /usr/local/bin/choco
+
+      - name: Create release
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          version: latest
+          args: release --clean --timeout=90m
+        env:
+          CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}

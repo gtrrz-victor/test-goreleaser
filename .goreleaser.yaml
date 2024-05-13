@@ -1,0 +1,59 @@
+project_name: test-goreleaser
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: test
+    ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.ShortCommit}} -X main.date={{.Date}}
+    binary: test
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+archives:
+  - format: tar.gz
+    # includes czdaemon, czctl and czsupervisor binaries on the same tar.gz
+    wrap_in_directory: true
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+brews:
+  - repository:
+      owner: "??"
+      name: test
+      branch: pasley
+    description: Testing gorelaser.
+    download_strategy: CurlDownloadStrategy
+    homepage: https://??.io/
+    test: |
+      system "#{bin}/test"
+
+chocolateys:
+  - name: test
+    owners: test
+    title: test
+    authors: test
+    project_url: https://test.iox/
+    url_template: "https://github.com/gtrrz-victor/test-goreleaser/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    icon_url: "https://cdn.rawgit.com/golangci/golangci-lint/master/assets/go.png"
+    license_url: https://github.com/gtrrz-victor/test-goreleaser/blob/master/LICENSE
+    require_license_acceptance: false
+    project_source_url: https://github.com/gtrrz-victor/test-goreleaser
+    package_source_url: https://github.com/gtrrz-victor/test-goreleaser
+    docs_url: https://docs.test.iox/
+    tags: "golang goreleaser testing"
+    summary: Testing gorelaser.
+    description: |
+      {{ .ProjectName }} installer package.
+    release_notes: "https://github.com/gtrrz-victor/test-goreleaser/releases/tag/v{{ .Version }}"
+    api_key: "{{ .Env.CHOCOLATEY_API_KEY }}"
+    source_repo: "https://push.chocolatey.org/"
+    skip_publish: false
