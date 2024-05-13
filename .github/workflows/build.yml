@@ -3,7 +3,9 @@ name: Build Binaries
 on:
   workflow_dispatch:
   workflow_call:
-
+  push:
+    tags:
+      - v*
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
@@ -34,7 +36,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v5
         with:
           version: latest
-          args: release --clean --snapshot --timeout=90m
+          args: release --clean --timeout=90m
         env:
           CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
