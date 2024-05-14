@@ -34,7 +34,6 @@ brews:
       owner: gtrrz-victor
       name: homebrew-test-goreleaser
       branch: main
-    folder: Formula
     description: Testing gorelaser.
     download_strategy: CurlDownloadStrategy
     homepage: https://??.io/
