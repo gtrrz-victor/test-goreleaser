@@ -32,7 +32,7 @@ snapshot:
 brews:
   - repository:
       owner: gtrrz-victor
-      name: test-goreleaser
+      name: homebrew-test-goreleaser
       branch: main
     folder: Formula
     description: Testing gorelaser.
