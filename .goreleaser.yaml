@@ -62,3 +62,8 @@ chocolateys:
     api_key: "{{ .Env.CHOCOLATEY_API_KEY }}"
     source_repo: "https://push.chocolatey.org/"
     skip_publish: false
+
+release:
+  github:
+    owner: gtrrz-victor
+    name: test-goreleaser
