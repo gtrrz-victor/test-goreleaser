@@ -27,7 +27,7 @@ archives:
         format: zip
 
 snapshot:
-  name_template: SNAPSHOT-{{ .Commit }}
+  name_template: "{{ .Version }}-snap.sha.{{ .ShortCommit }}"
 
 brews:
   - repository:
