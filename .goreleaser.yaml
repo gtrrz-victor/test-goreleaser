@@ -39,7 +39,7 @@ brews:
     download_strategy: CurlDownloadStrategy
     homepage: https://??.io/
     test: |
-      system "#{bin}/test"
+      system "#{bin}"
 
 chocolateys:
   - name: test-goreleaser
