@@ -33,7 +33,7 @@ brews:
       branch: main
       token: "{{ .Env.GITHUB_PERSONAL_AUTH_TOKEN }}"
     description: Testing gorelaser.
-    download_strategy: CurlDownloadStrategy
+    download_strategy: GitHubPrivateRepositoryReleaseDownloadStrategy
     homepage: https://??.io/
     test: |
       system "#{bin}"
