@@ -1,0 +1,30 @@
+project_name: test-goreleaser
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: gttest
+    ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.ShortCommit}} -X main.date={{.Date}}
+    binary: gttest
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+archives:
+  - format: tar.gz
+    # includes czdaemon, czctl and czsupervisor binaries on the same tar.gz
+    wrap_in_directory: true
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+snapshot:
+  name_template: "{{ .Version }}-snap.sha.{{ .ShortCommit }}"

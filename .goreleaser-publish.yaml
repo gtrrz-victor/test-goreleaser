@@ -5,9 +5,9 @@ before:
     - go mod tidy
 
 builds:
-  - id: test
+  - id: gttest
     ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.ShortCommit}} -X main.date={{.Date}}
-    binary: test
+    binary: gttest
     env:
       - CGO_ENABLED=0
     goos:
@@ -25,9 +25,6 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
-
-snapshot:
-  name_template: "{{ .Version }}-snap.sha.{{ .ShortCommit }}"
 
 brews:
   - repository:
