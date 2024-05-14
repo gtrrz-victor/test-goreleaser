@@ -44,3 +44,4 @@ jobs:
         env:
           CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PERSONAL_AUTH_TOKEN: ${{ secrets.PERSONAL_AUTH_TOKEN }}

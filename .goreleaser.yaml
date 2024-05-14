@@ -34,6 +34,7 @@ brews:
       owner: gtrrz-victor
       name: homebrew-test-goreleaser
       branch: main
+      token: "{{ .Env.GITHUB_PERSONAL_AUTH_TOKEN }}"
     description: Testing gorelaser.
     download_strategy: CurlDownloadStrategy
     homepage: https://??.io/
