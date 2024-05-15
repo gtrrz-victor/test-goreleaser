@@ -34,21 +34,12 @@ jobs:
           echo 'mono /opt/chocolatey/choco.exe $@' >> /usr/local/bin/choco
           chmod +x /usr/local/bin/choco
 
-      # - name: Create release
-      #   uses: goreleaser/goreleaser-action@v5
-      #   with:
-      #     version: latest
-      #     args: release --clean --timeout=90m -f .goreleaser-publish.yaml
-      #   env:
-      #     CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     GITHUB_PERSONAL_AUTH_TOKEN: ${{ secrets.PERSONAL_AUTH_TOKEN }}
-
-      - name: Create release custom brew
+      - name: Create release
         uses: goreleaser/goreleaser-action@v5
         with:
           version: latest
-          args: release --clean --timeout=90m -f .goreleaser-custom-brew.yaml
+          args: release --clean --timeout=90m -f .goreleaser-publish.yaml
         env:
+          CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PERSONAL_AUTH_TOKEN: ${{ secrets.PERSONAL_AUTH_TOKEN }}
