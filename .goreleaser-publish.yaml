@@ -66,5 +66,7 @@ release:
     name: test-goreleaser
 
 changelog:
-  include:
-    - "^feat:"
+  filters:
+    include:
+      - "^feat:"
+      - "^fix:"
