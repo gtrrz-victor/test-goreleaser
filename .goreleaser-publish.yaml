@@ -39,9 +39,9 @@ brews:
       system "#{bin}"
 
 chocolateys:
-  - name: test-goreleaser-poc
+  - name: test-goreleaser
     owners: gtrrz-victor
-    title: test-poc
+    title: test
     authors: gtrrz-victor
     project_url: https://test.iox/
     url_template: "https://github.com/gtrrz-victor/test-goreleaser/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
